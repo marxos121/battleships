@@ -24,16 +24,15 @@ class Gameboard {
     if (startRow + length > this.#board.length) {
       return false;
     }
-    const ship = new Ship(length);
     for (let i = 0; i < length; ++i) {
-      if (this.#board[startRow + i][startCol] === null) {
-        this.#board[startRow + i][startCol] = ship;
-      } else {
-        for (let j = i; j >= 0; --j) {
-          this.#board[startRow + j][startCol] = null;
-        }
+      if (this.#board[startRow + i][startCol] !== null) {
         return false;
       }
+    }
+
+    const ship = new Ship(length);
+    for (let i = 0; i < length; ++i) {
+      this.#board[startRow + i][startCol] = ship;
     }
     this.#ships.push(ship);
     return true;
@@ -44,17 +43,17 @@ class Gameboard {
       return false;
     }
 
-    const ship = new Ship(length);
     for (let i = 0; i < length; ++i) {
-      if (this.#board[startRow][startCol + i] === null) {
-        this.#board[startRow][startCol + i] = ship;
-      } else {
-        for (let j = i; j >= 0; ++j) {
-          this.#board[startRow][startCol + j] = null;
-        }
+      if (this.#board[startRow][startCol + i] !== null) {
         return false;
       }
     }
+
+    const ship = new Ship(length);
+    for (let i = 0; i < length; ++i) {
+      this.#board[startRow][startCol + i] = ship;
+    }
+
     this.#ships.push(ship);
     return true;
   }
